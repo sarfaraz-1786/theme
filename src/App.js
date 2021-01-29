@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, createContext } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+export const ContextProvider = createContext();
+export const MovieProvider = (props) => {
+    const [state, setState] = useState([
+        {
+            id: 1,
+            name: "sarfaraz",
+            age: 5,
+        },
+        {
+            id: 2,
+            name: "saiffi",
+            age: 22,
+        },
+    ]);
+    const [style, setStyle] = useState(false);
+
+    return (
+        <ContextProvider.Provider
+            value={[state, setState]}
+            stylevalue={[style, setStyle]}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
-export default App;
+            {props.children}
+        </ContextProvider.Provider>
+    );
+};
